@@ -64,7 +64,7 @@ install_xlibre() {
 	#
 	pkg install -y xlibre-server
     pkg install -y xlibre-drivers
-    #pkg install -y xlibre-xf86-input-libinput	
+    pkg install -y xlibre-xf86-input-libinput	
 	
 	sysrc dbus_enable="YES"
 	log_info "Configurando teclado y mouse para X11..."
