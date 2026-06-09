@@ -40,7 +40,7 @@ configure_cpu_microcode() {
             install_pkg "cpu-microcode-intel"
             ;;
         *)
-            log_warn "CPU no identificado ($cpu_model). Omitiendo microcódigo."
+            log_info "CPU no identificado ($cpu_model). Omitiendo microcódigo."
             return 0
             ;;
     esac
@@ -48,13 +48,13 @@ configure_cpu_microcode() {
     if pkg info -e "cpu-microcode-amd" || pkg info -e "cpu-microcode-intel"; then
         
         service microcode_update start 2>/dev/null || \
-            log_warn "No se pudo iniciar microcode_update de forma interactiva."
+            log_info "No se pudo iniciar microcode_update de forma interactiva."
     fi
     
 }
 
 
-install_xlibre{
+install_xlibre() {
 	
 	#pkg install -y xlibre-xf86-video-vmware open-vm-tools 
 	#pkg install -y graphics/drm-kmod
@@ -434,7 +434,7 @@ sed -i '' 's/^security\.bsd\.see_other_gids=.*/security.bsd.see_other_gids=1/' /
 sysctl security.bsd.see_other_uids=1
 sysctl security.bsd.see_other_gids=1
 
-printf "[ ${CG}NOTE${NC} ]  Creating SKEL structure\n\n"
+printf " Creating SKEL structure\n\n"
 mkdir -p /usr/share/skel/Escritorio
 mkdir -p /usr/share/skel/Documentos
 mkdir -p /usr/share/skel/Descargas
@@ -465,7 +465,8 @@ TryExec=xcompmgr
 X-LXQt-Need-Tray=true
 X-LXQt-X11-Only=true
 
-EOFpkg install pavucontrol-qt freedesktop-sound-theme
+EOF 
+pkg install pavucontrol-qt freedesktop-sound-theme
 
 #OnlyShowIn=LXQt;
 
@@ -520,7 +521,7 @@ XDG_PUBLICSHARE_DIR="$HOME/Público"
 XDG_DOCUMENTS_DIR="$HOME/Documentos"
 XDG_MUSIC_DIR="$HOME/Música"
 XDG_PICTURES_DIR="$HOME/Imágenes"
-XDG_VIDEOS_DIR="$HOME/Vídeos""
+XDG_VIDEOS_DIR="$HOME/Vídeos"
 EOF
 
 
@@ -544,13 +545,6 @@ cursor_theme=redglass
 left_handed=false
 EOF
 
-cat > /usr/share/skel/.config/lxqt/session.conf << 'EOF'
-[General]
-window_manager=openbox
-
-[Environment]
-XCURSOR_PATH=~/.icons:/usr/local/share/icons
-EOF
 
 cat > /usr/share/skel/.dmrc << 'EOF'
 [Desktop]
