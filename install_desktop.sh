@@ -246,7 +246,7 @@ XORG_DIR="/usr/local/etc/X11/xorg.conf.d"
             #0x80ee) desc="VirtualBox" ;;
             #*)      desc="GPU Desconocida" ;;
         case "$vendor" in
-            0x10de) desc="NVIDIA" ;;
+
             0x15ad) driver_name="vmware" ;;
             0x1234) driver_name="qxl" ;;
             0x10de) driver_name="nvidia" ;;
